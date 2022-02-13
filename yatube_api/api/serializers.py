@@ -14,7 +14,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class GroupSerializer(serializers.ModelSerializer):
-    
+
     class Meta:
         model = Group
         fields = ('title', 'slug', 'description')
@@ -41,15 +41,15 @@ class UserSerializer(serializers.ModelSerializer):
 
 class FollowSerializer(serializers.ModelSerializer):
     user = serializers.SlugRelatedField(
-        read_only=True, 
+        read_only=True,
         slug_field='username',
         default=serializers.CurrentUserDefault()
     )
     following = serializers.SlugRelatedField(
-        slug_field='username', 
+        slug_field='username',
         queryset=User.objects.all()
     )
-    
+
     def validate(self, data):
         request = self.context.get('request')
         following = data['following']
@@ -58,7 +58,7 @@ class FollowSerializer(serializers.ModelSerializer):
                 'Нельзя подписываться на себя.'
             )
         return data
-    
+
     class Meta:
         fields = '__all__'
         model = Follow

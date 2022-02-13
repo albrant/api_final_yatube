@@ -58,9 +58,7 @@ class Follow(models.Model):
             models.UniqueConstraint(
                 fields=['user', 'following'],
                 name='unique_user_following'
-            ),
-            #models.CheckConstraint(check=~models.Q(user=models.F('following')),
-            #                       name='user_not_author')
+            )
         ]
 
     def __str__(self) -> str:
