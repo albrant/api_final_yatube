@@ -1,3 +1,4 @@
+from django.views.generic import TemplateView
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
@@ -8,6 +9,11 @@ from rest_framework import permissions
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls', namespace='api')),
+    path(
+        'redocold/',
+        TemplateView.as_view(template_name='api/redoc.html'),
+        name='redocold'
+    ),
 ]
 
 schema_view = get_schema_view(
